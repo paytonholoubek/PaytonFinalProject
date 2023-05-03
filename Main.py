@@ -4,6 +4,10 @@ def main():
 	inventory = ["", ""]
 	player_position = ""
 	item1 = "Samurai_katana"
+	item1_collected = False
+	Room5_zombiesgone = False
+
+	controls = ("CONTROLS:\n\nWEST\nEAST\nNORTH\nSOUTH\nPICKUP\nATTACK\n")
 
 	Room1 = ("You look around from the car you took to the mall, there are 4 ways you can go. Hallways to your north, west, and east. And south is the exit.")
 	Room2 = ("As you enter the room you see it used to be a cafe of some kind, you try one of the machines but it doesn't work. Dang. You decide to get back to your job and see a hallway to the west")
@@ -46,6 +50,8 @@ def main():
 	Room29 = ("When you enter the girls bathroom, the only thing there remotely close to a girl are the rats running around.")
 	Room30_tazznotsaved = (f"As you enter the bathroom, you hear a massive fart and plop. 'Is that you Tazz?' you call out. All the sudden a stall opens and you see Tazz come out of it. '{player_name}! You got me at a bad time but I was stuck here and needed to do my thing yknow. I actually gathered some food for the colony, I will meet you at the car!'")
 	Room30_tazzsaved = (f"You enter the boys bathroom and hear a disfunctional toilet constantly flushing, how is that thing still working?")
+	Zombies_in_room = ("You can't go this way with zombies right there!")
+	Locked_door_room = ("You can't continue until you find a way through this door!")
 #GAME START
 
 	print("After some Chinese scientist had a failed experiment, zombies began to appear all throughout the world and cause a meltdown of humanity")
@@ -57,7 +63,7 @@ def main():
 	player_position = Room1
 	player_input = ""
 	while "q" not in player_input:
-		player_input = input("Which direction do you want to go?\n").lower()
+		player_input = input("What do you want to do?\n").lower()
 
 		if player_input == "north" and player_position == Room1:
 			player_position = Room15
@@ -68,6 +74,8 @@ def main():
 		elif player_input == "north" and player_position == Room16:
 			player_position = Room17
 			print(f"{player_position}")
+		elif player_input == "controls":
+			print(f"\n{controls}")
 		
 		
 		elif player_input == "west" and player_position == Room1:
@@ -76,21 +84,37 @@ def main():
 		elif player_input == "west" and player_position == Room2:
 			player_position = Room3
 			print(f"{player_position}")
-		elif player_input == "north" and player_position == Room3:
-			player_position = Room8_weaponnotcollected
-			print(f"{player_position}")
+		elif player_position == Room3:
+			if player_input == "east":
+				player_position = Room2
+				print(f"{player_position}")
+			elif player_input == "north" and item1_collected == False:
+				player_position = Room8_weaponnotcollected
+				print(f"{player_position}")
+			elif player_input == "north" and item1_collected == True:
+				player_position = Room8
+				print(f"{player_position}")
+			elif player_input == "west":
+				player_position = Room4
+				print(f"{player_position}")
+			else:
+				print("You can't go that way.")
 		elif player_input == "pickup" and player_position == Room8_weaponnotcollected:
 			player_position = Room8
 			print("You walk over and pick up the katana in the barrel, it shines brightly in the room.")
+			item1_collected = True
 			inventory.append(item1)
 		elif player_input == "south" and player_position == Room8 or Room8_weaponnotcollected:
 			player_position = Room3
 			print(f"{player_position}")
+		elif player_input == "west" and player_position == Room4:
+			player_position = Room5z
+			print(f"{player_position}")
+		elif player_input == "west" and player_position == Room5z and Room5_zombiesgone == False:
+			print(f"{Zombies_in_room}")
 
-#Ask for help on setting weapon not collected to false once you pick it up
-			
 
-
+		
 
 
 
