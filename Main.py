@@ -86,6 +86,8 @@ def main():
 		elif player_input == "south" and player_position == Room8 or Room8_weaponnotcollected:
 			player_position = Room3
 			print(f"{player_position}")
+
+#Ask for help on setting weapon not collected to false once you pick it up
 			
 
 
