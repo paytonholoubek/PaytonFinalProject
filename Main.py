@@ -120,12 +120,13 @@ def main():
     roomNoZ = False
     room9NoZ = False
     room12NoZ = False
-    issacSaved = False
+    isaacSaved = False
     tazzSaved = False
     shotgunPickedUp = False
     keyPickedUp = False
     baseballbatPickedUp = False
     katanaPickedUp = False
+    save = [room_number, room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp]
 
     while True:
         player_input = ""
@@ -759,6 +760,23 @@ def main():
                       print("you cannot pick anything up here.")
                 if player_input == "attack":
                       print("you cannot attack here")
+                      
+        elif player_input == "save":
+                f = open("save.txt", "w")
+                f.write("")
+                f.close()
+                f = open("save.txt", "a")
+                for i in range(len(save)):
+                      f.write(str(save[i]) + ",")
+                f.close()
+            
+        elif player_input == "load":
+                f = open("save.txt", "r")
+                line = f.readline()
+                f.close()
+                save = line.split(",")
+                
+
 
 
 
