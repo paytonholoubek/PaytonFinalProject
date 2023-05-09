@@ -1,3 +1,4 @@
+import pickle
 #i changed you movement system so that each room had its own block of code.
 #this allows you to easily control where the player can move and do other event like picking up items or attacking
 #the code I made is:
@@ -60,6 +61,12 @@ def main():
     Room12_zombiesgone = False
     Room19_zombiesgone = False
     Room27_unlocked = False
+    ending = False
+    ending1 = False
+    ending2 = False
+    ending3 = False
+    ending4 = False
+    true_ending = False
 
     controls = ("CONTROLS:\n\nWEST\nEAST\nNORTH\nSOUTH\nPICKUP\nATTACK/USE\n")
 
@@ -126,7 +133,7 @@ def main():
     keyPickedUp = False
     baseballbatPickedUp = False
     katanaPickedUp = False
-    save = [room_number, room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp]
+    save = [room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, Room5_zombiesgone, Room12_zombiesgone, Room19_zombiesgone, Room27_unlocked]
 
     while True:
         player_input = ""
@@ -147,7 +154,7 @@ def main():
               shotgunPickedUp = True
               inventory.append(item4)
               keyPickedUp = True
-              print("Given every weapoon in the game.")
+              print("Given every weapon in the game.")
 
       
 
@@ -162,8 +169,11 @@ def main():
                 if player_input == "east":
                       room_number = 10
                       print(Room10)
-                if player_input == "south":
-                    print("you cannot go this way.")
+                if player_input == "south" and isaacSaved == False and tazzSaved == False:
+                    print("You decide to leave without either of your friends. You arrive back at the colony and tell them that Tazz and Isaac got captured by zombies. You will never live down the guilt you feel now by leaving your friends behind.\n")
+                    print("Congrats! You got Ending 1 of 5; Betrayal.")
+                    ending1 = True
+                    ending = True
                 if player_input == "pickup":
                       print("you cannot pick anything up here.")
                 if player_input == "attack":
@@ -760,26 +770,26 @@ def main():
                       print("you cannot pick anything up here.")
                 if player_input == "attack":
                       print("you cannot attack here")
-                      
-        elif player_input == "save":
-                f = open("save.txt", "w")
-                f.write("")
-                f.close()
-                f = open("save.txt", "a")
-                for i in range(len(save)):
-                      f.write(str(save[i]) + ",")
-                f.close()
-            
-        elif player_input == "load":
-                f = open("save.txt", "r")
-                line = f.readline()
-                f.close()
-                save = line.split(",")
-                
+       
+
+        if ending == True:
+            item1_collected = False
+            Room5_zombiesgone = False
+            Room12_zombiesgone = False
+            Room19_zombiesgone = False
+            Room27_unlocked = False
+            room9NoZ = False
+            room12NoZ = False
+            isaacSaved = False
+            tazzSaved = False
+            shotgunPickedUp = False
+            keyPickedUp = False
+            baseballbatPickedUp = False
+            katanaPickedUp = False
+            room_number = 1
 
 
-
-
+#go to 7
 
 if __name__ == "__main__":
 		main()
