@@ -61,14 +61,9 @@ def main():
     Room12_zombiesgone = False
     Room19_zombiesgone = False
     Room27_unlocked = False
-    ending = False
-    ending1 = False
-    ending2 = False
-    ending3 = False
-    ending4 = False
-    true_ending = False
+   
 
-    controls = ("CONTROLS:\n\nWEST\nEAST\nNORTH\nSOUTH\nPICKUP\nATTACK/USE\n")
+    controls = ("CONTROLS:\n\nWEST\nEAST\nNORTH\nSOUTH\nPICKUP\nATTACK/USE\nHELP\n")
 
     Room1 = ("\nYou look around from the car you took to the mall, there are 4 ways you can go. Hallways to your north, west, and east. And south is the exit.")
     Room2 = ("\nAs you enter the room you see it used to be a cafe of some kind, you try one of the machines but it doesn't work. Dang. You decide to get back to your job and see a hallway to the west")
@@ -94,7 +89,7 @@ def main():
     Room17 = ("\nWhen you open the door, you come upon a massive area, with beautiful statues now covered in moss, you guess this is the center of the mall. There are paths in all directions.")
     Room18 = ("\nThis hallway looks like it once was a beautiful piece of architecture, but now there is greenery covering all of it. It makes it beautiful in a weird way. The hallway continues west or east")
     Room19 = ("\nSince the zombies are scattered, this area is trashed with junk thrown everywhere. This room looks like it could have been a food court in the past. There are hallways south, west, and east.")
-    Room20 = ("\nAs you continue going west, you can hear some noises coming from a building just west from where you are.")
+    Room20 = ("\nAs you continue enter the room, you can hear some noises coming from a building just west from where you are.")
     Room21_isaacnotsaved = (f"\nAs you enter the store, you see your friend Isaac, '{player_name}! I thought you weren't gonna find me, you must've dealt with the zombies since you made it here. I am gonna go to the car and place my supplies there, see you there!' With Isaac leaving, you see nothing else in this room.")
     Room21_isaacsaved = ("\nAs you enter the room, you see some stray rats scrambling around, how did these rats cause all this ruckus?")
     Room22_weaponnotcollected = ("\nYou decide to go east, and as you are walking across the hallway, you see a shotgun to the right. The hallway continues on East")
@@ -134,8 +129,31 @@ def main():
     baseballbatPickedUp = False
     katanaPickedUp = False
     save = [room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, Room5_zombiesgone, Room12_zombiesgone, Room19_zombiesgone, Room27_unlocked]
+    ending = False
+    ending1 = False
+    ending2 = False
+    ending3 = False
+    ending4 = False
+    true_ending = False
 
     while True:
+        if ending == True:
+            item1_collected = False
+            Room5_zombiesgone = False
+            Room12_zombiesgone = False
+            Room19_zombiesgone = False
+            Room27_unlocked = False
+            room9NoZ = False
+            room12NoZ = False
+            isaacSaved = False
+            tazzSaved = False
+            shotgunPickedUp = False
+            keyPickedUp = False
+            baseballbatPickedUp = False
+            katanaPickedUp = False
+            room_number = 1
+            ending = False
+        
         player_input = ""
         player_input = input("\nWhat do you want to do?\n").lower()
 
@@ -155,6 +173,16 @@ def main():
               inventory.append(item4)
               keyPickedUp = True
               print("Given every weapon in the game.")
+      
+        if player_input == "command.allendings_complete":
+              ending1 = True
+              ending2 = True
+              ending3 = True
+              ending4 = True
+              print("Given every ending except the true ending!")
+
+        if player_input == "help":
+              print("Ending 1: Betrayal\nEnding 2: Betrayal of Tazz\nEnding 3: Betrayal of Isaac\nEnding 4: Good Ending\nEnding 5: True Ending (hint, you need every other ending to get this one!)")
 
       
 
@@ -174,6 +202,21 @@ def main():
                     print("Congrats! You got Ending 1 of 5; Betrayal.")
                     ending1 = True
                     ending = True
+                if player_input == "south" and isaacSaved == True and tazzSaved == False:
+                    print("As you are entering the car, Isaac asks 'hey, what about Tazz?' You told him that you were too late to rescue him and he died. Isaac gave a sad expression but said that you should leave as soon as you can. You can never live down the guilt of lying to your best friend and deserting the other.\n")
+                    print("Congrats! You got Ending 2 of 5; Tazz Deserted")
+                    ending2 = True
+                    ending = True
+                if player_input == "south" and isaacSaved == False and tazzSaved == True:
+                    print("As you start to get in the car, Tazz asks 'Hey, what about Isaac? Are we just gonna leave him?'\nYou told him that Isaac had died by the time you had got there and that you needed to go. Tazz agreed and you both left. You will never live down the guilt of leaving your friend behind.\n")
+                    print("Congrats! You got Ending 3 out of 5; Betrayal of Isaac")
+                    ending3 = True
+                    ending = True
+                if player_input == "south" and isaacSaved == True and tazzSaved == True:
+                      print("As you arrive back to the car, you see both of your best friends there. You get a good feeling knowing that you saved both of their lives. 'Come on guys, lets get out of here and back to the colony.' Tazz and Isaac agree and you three all head out back to the colony and you still have both of your best friends.")
+                      print("Congrats! You got Ending 4 out of 5; Good Ending")
+                      ending4 = True
+                      ending = True
                 if player_input == "pickup":
                       print("you cannot pick anything up here.")
                 if player_input == "attack":
@@ -561,13 +604,14 @@ def main():
                     print("You cannot go this way")
                 if player_input == "west":
                       room_number = 21
-                      if issacSaved == False: #another single time event using a boolen
-                        print(Room21_isaacnotsaved)
-                      if issacSaved == True:
+                      if isaacSaved == True:
                             print(Room21_isaacsaved)
+                      if isaacSaved == False: #another single time event using a boolen
+                        print(Room21_isaacnotsaved)
+                        isaacSaved = True
                 if player_input == "east":
-                      room_number = 4
-                      print(Room2)
+                      room_number = 19
+                      print(Room19_zombiesgone)
                 if player_input == "south":
                     #room_number = 0
                     print("you cannot go this way.")
@@ -625,7 +669,9 @@ def main():
                       print(Room22)
                 if player_input == "east":
                       room_number = 24
-                      print(Room24_normal) #this says it has a normal room and an ending but they are both the same, im going to assume this isn't finished so I just put the normal room 24
+                      print(Room24_normal)
+                if player_input == "east" and ending1 == True and ending2 == True and ending3 == True and ending4 == True:
+                      print("As you enter the room, you see a painting at the end glowing very bright, it looks like a portal you can enter!\n") #this says it has a normal room and an ending but they are both the same, im going to assume this isn't finished so I just put the normal room 24
                 if player_input == "south":
                     #room_number = 0
                     print("you cannot go this way.")
@@ -641,12 +687,24 @@ def main():
                 if player_input == "west":
                       room_number = 23
                       print(Room23)
-                if player_input == "east":
+                if player_input == "east" and ending1 == True and ending2 == True and ending3 == True and ending4 == True:
+                      print(f"As you step into the portal, you get blinded. You start to panic as you don't know what is going on until all the sudden you fall asleep.\nWhen you wake up you look around and you see a man standing in front of you. 'God?' you ask to the figure.\nThe figure would turn around and reveal himself to be Mr. Simonsen, your old programming teacher. 'Congrats {player_name}, you beat the simulation!' (type 'continue' to continue on with the dialogue)")
+                      if player_input == "continue":
+                              print("'Simulation?' you ask him. 'Yes, everything you see here is just a simulation to see what you would do during the apocalypse! Your input is greatly appreciated.' You look around and pinch yourself\nAll the sudden you wake up in a fully white room with a bunch of scientists looking at you.")
+                              print("Congrats! You have gotten Ending 5 of 5; True Ending")
+                              print("Thank you for playing!")
+                              break
+                if player_input == "east" and ending1 == False or ending2 == False or ending3 == False or ending4 == False:
                       #room_number = 0
                       print("You cannot go this way.")
                 if player_input == "south":
                     #room_number = 0
                     print("you cannot go this way.")
+                if player_input == "continue" and ending1 == True and ending2 == True and ending3 == True and ending4 == True:
+                        print("'Simulation?' you ask him. 'Yes, everything you see here is just a simulation to see what you would do during the apocalypse! Your input is greatly appreciated.' You look around and pinch yourself\nAll the sudden you wake up in a fully white room with a bunch of scientists looking at you.\n")
+                        print("Congrats! You have gotten Ending 5 of 5; True Ending")
+                        print("Thank you for playing!")
+                        break
                 if player_input == "pickup":
                       print("you cannot pick anything up here.")
                 if player_input == "attack":
@@ -699,10 +757,11 @@ def main():
         elif "room" + str(room_number) == "room27": #Room 27
                 if player_input == "north":
                     room_number = 30
-                    if tazzSaved == False: #one time event to pick up the baton
+                    if tazzSaved == True:      
+                          print(Room30_tazzsaved)                   
+                    elif tazzSaved == False: #one time event to pick up the baton
                           print(Room30_tazznotsaved)
-                    elif tazzSaved == True:      
-                          print(Room30_tazzsaved)
+                          tazzSaved = True
                 if player_input == "west":
                       room_number = 28
                       print(Room28)
@@ -771,23 +830,10 @@ def main():
                 if player_input == "attack":
                       print("you cannot attack here")
        
-
-        if ending == True:
-            item1_collected = False
-            Room5_zombiesgone = False
-            Room12_zombiesgone = False
-            Room19_zombiesgone = False
-            Room27_unlocked = False
-            room9NoZ = False
-            room12NoZ = False
-            isaacSaved = False
-            tazzSaved = False
-            shotgunPickedUp = False
-            keyPickedUp = False
-            baseballbatPickedUp = False
-            katanaPickedUp = False
-            room_number = 1
-
+        elif player_input == "save" and player_position == 1:
+              print("Position saved, and game data loaded.")
+              with open("zombieapocalypse.dat", "wb") as file:
+                    pickle.dump(())
 
 #go to 7
 
