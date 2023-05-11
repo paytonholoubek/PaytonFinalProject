@@ -1,51 +1,7 @@
 import pickle
-#i changed you movement system so that each room had its own block of code.
-#this allows you to easily control where the player can move and do other event like picking up items or attacking
-#the code I made is:
-#  if "room" + str(room_number) == "room0": 
-#     if player_input == "north":
-#        room_number = 0
-#        print(Room0)
-#
-#     if player_input == "west":
-#        room_number = 0
-#        print(Room0)
-#
-#     if player_input == "east":
-#        room_number = 0
-#        print(Room0)
-#
-#     if player_input == "south":
-#        room_number = 0
-#        print(Room0)
-#
-#     if player_input == "pickup":
-#        print("you cannot pick anything up here.")
-#
-#     if player_input == "attack":
-#        print("you cannot attack here")
-#
-#
-#I added some new variable (mostly for event like picking things up or talking to people) and one of the is the room_number.
-#The room_number variable is an integer that controls what room you are in.
-#it tests what room you are in by concatonating the string "room" and the room_number as a string to see if it matches a room in the code
-#
-#In the if statement, it tests for 1 of 6 inputs: north, south, east, west, pickup, or attack
-#If any one of those are selected it will run the code in that inputs if statement.
-#for the movement, it usually changes the room number to the room number of the room your going into then print the text for that room and move on.
-#Sometimes, though, there is an event. When that happened I made a variable to test if the event has happened or not.
-#this just adds another if statement in the input if statement section to test if the event has happened; if it hasn't it runs it, if it has it doesn't run it.
-#For some of these events you will need to add code to pick things up and add them to the inventory of the player.
-#Other ones, like fighting, you will also have to implement
-#
-#The pickup and fight inputs usually give the same response of not being able to do it.
-#change what you want them to do by just replacing the default print command I put.
-#
-#I also left several comments throughout the code that show where you need add certain thing
-#
-#lastly, I made you loop a while True: loop that runs forever, to exit the game at anytime input "break" and the game will end.
-#
-#Text me if you have any other questions
+
+#EXAMPLE OBJECT, NOT IN THE GAME
+
 
 def main():
 #BEFORE GAME START
@@ -184,6 +140,8 @@ def main():
         if player_input == "help":
               print("Ending 1: Betrayal\nEnding 2: Betrayal of Tazz\nEnding 3: Betrayal of Isaac\nEnding 4: Good Ending\nEnding 5: True Ending (hint, you need every other ending to get this one!)")
 
+        if player_input == "inventory":
+              print(f"{inventory}")
       
 
 
@@ -830,12 +788,38 @@ def main():
                 if player_input == "attack":
                       print("you cannot attack here")
        
-        elif player_input == "save" and player_position == 1:
+        elif player_input == "save":
               print("Position saved, and game data loaded.")
               with open("zombieapocalypse.dat", "wb") as file:
-                    pickle.dump(())
+                    pickle.dump((room_number, room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, ending1, ending2, ending3, ending4, item1_collected, Room5_zombiesgone, Room12_zombiesgone, Room27_unlocked, inventory), file)
+       
+        elif player_input == "load":
+              print("Position and game data loaded.")
+              with open("zombieapocalypse.dat", "rb") as file:
+                    loaded_data = pickle.load(file)
+              room_number, room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, ending1, ending2, ending3, ending4, item1_collected, Room5_zombiesgone, Room12_zombiesgone, Room27_unlocked, inventory = loaded_data
 
 #go to 7
+
+#EXAMPLE OBJECT
+#class Example:
+     # def __init__(self, name, age):
+           # self.name = name
+            #self.age = age
+
+     # def greet(self):
+            #print(f"Hello, my name is {self.name} and I'm {self.age} years old.")
+
+#obj = Example("John", 30)
+
+#print(obj.name)
+#print(obj.age)
+
+#obj.greet()
+
+
+
+
 
 if __name__ == "__main__":
 		main()
