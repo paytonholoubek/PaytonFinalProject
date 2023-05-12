@@ -81,13 +81,14 @@ def main():
     keyPickedUp = False
     baseballbatPickedUp = False
     katanaPickedUp = False
-    save = [room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, Room5_zombiesgone, Room12_zombiesgone, Room19_zombiesgone, Room27_unlocked]
     ending = False
     ending1 = False
     ending2 = False
     ending3 = False
     ending4 = False
     true_ending = False
+    save = [room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, Room5_zombiesgone, Room12_zombiesgone, Room19_zombiesgone, Room27_unlocked, shotgunPickedUp, ending1, ending2, ending3, ending4]
+   
 
     while True:
         if ending == True:
@@ -110,6 +111,113 @@ def main():
         player_input = ""
         player_input = input("\nWhat do you want to do?\n").lower()
 
+       
+       
+       
+        if player_input == "save":
+
+            #this creates a text file name "save.txt". The "w" means that you are writing to it
+            f = open("save.txt", "w")
+            f.write("") #this is creating the file/clearing it if it already exists
+            f.close() #closes the file
+
+            f = open("save.txt", "a") #opens the "save.txt" file, the "a" means that you are appending to it
+            for i in range(len(save)): #for loop going through the save list
+                  f.write(str(save[i]) + ",") #systematically saving each value in the save list to "save.txt" with a comma after it
+
+            f.close() #close the file
+
+        if player_input == "load":
+            f = open("save.txt", "r") #opens "save.txt", the "r" means that you are reading the file
+            line = f.readline() #saves the first line of "save.txt" as a variable
+            f.close() #close the file
+
+            saveLoad = line.split(",") #.split() save the line we loaded from "save.txt" into the save variable but splits it at each comma; 1,2,3 would become ["1","2","3"]
+
+            #the following code just assigns each variable true or false depending on what value saveLoad[x] was
+            if saveLoad[0] == "True":
+                  room9NoZ = True
+            else:
+                  room9NoZ = False
+            
+            if saveLoad[1] == "True":
+                  room12NoZ = True
+            else:
+                  room12NoZ = False
+            
+            if saveLoad[2] == "True":
+                  isaacSaved = True
+            else:
+                  isaacSaved = False
+
+            if saveLoad[3] == "True":
+                  tazzSaved = True
+            else:
+                  tazzSaved = False
+
+            if saveLoad[4] == "True":
+                  shotgunPickedUp = True
+            else:
+                  shotgunPickedUp = False
+
+            if saveLoad[5] == "True":
+                  keyPickedUp = True
+            else:
+                  keyPickedUp = False
+
+            if saveLoad[6] == "True":
+                  baseballbatPickedUp = True
+            else:
+                  baseballbatPickedUp = False
+
+            if saveLoad[7] == "True":
+                  katanaPickedUp = True
+            else:
+                  katanaPickedUp = False
+
+            if saveLoad[8] == "True":
+                  Room5_zombiesgone = True
+            else:
+                  Room5_zombiesgone = False
+
+            if saveLoad[9] == "True":
+                  Room12_zombiesgone = True
+            else:
+                  Room12_zombiesgone = False
+
+            if saveLoad[10] == "True":
+                  Room19_zombiesgone = True
+            else:
+                  Room19_zombiesgone = False
+
+            if saveLoad[11] == "True":
+                  Room27_unlocked = True
+            else:
+                  Room27_unlocked = False
+            
+            if saveLoad[12] == "True":
+                  ending1 = True
+            else:
+                  ending1 = False
+            
+            if saveLoad[13] == "True":
+                  ending2 = True
+            else:
+                  ending2 = False
+            
+            if saveLoad[14] == "True":
+                  ending3 = True
+            else: 
+                  ending3 = False
+            
+            if saveLoad[15] == "True":
+                  ending4 = True
+            else:
+                  ending4 = False
+       
+       
+       
+       
         if player_input == "quit":
               break
         
@@ -255,10 +363,10 @@ def main():
                     print("you cannot go this way.")
                 if player_input == "pickup":
                       print("you cannot pick anything up here.")
-                if player_input == "attack" and item1 in inventory:
+                if player_input == "attack" and katanaPickedUp == True:
                       print("You rush at the zombies with your katana, not knowing how to handle one your form isn't great. But you kill a couple zombies and the rest scatter, allowing you to move on.")
                       Room5_zombiesgone = True
-                if player_input == "attack" and item1 not in inventory:
+                if player_input == "attack" and katanaPickedUp == False:
                       print("You don't have the correct weapon to attack these zombies.")
                       
                 
