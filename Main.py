@@ -1,8 +1,5 @@
 import pickle
 
-#EXAMPLE OBJECT, NOT IN THE GAME
-
-
 def main():
 #BEFORE GAME START
     player_name = input("Enter your character's name: \n")
@@ -788,17 +785,7 @@ def main():
                 if player_input == "attack":
                       print("you cannot attack here")
        
-        elif player_input == "save":
-              print("Position saved, and game data loaded.")
-              with open("zombieapocalypse.dat", "wb") as file:
-                    pickle.dump((room_number, room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, ending1, ending2, ending3, ending4, item1_collected, Room5_zombiesgone, Room12_zombiesgone, Room27_unlocked, inventory), file)
-       
-        elif player_input == "load":
-              print("Position and game data loaded.")
-              with open("zombieapocalypse.dat", "rb") as file:
-                    loaded_data = pickle.load(file)
-              room_number, room9NoZ, room12NoZ, isaacSaved, tazzSaved, shotgunPickedUp, keyPickedUp, baseballbatPickedUp, katanaPickedUp, ending1, ending2, ending3, ending4, item1_collected, Room5_zombiesgone, Room12_zombiesgone, Room27_unlocked, inventory = loaded_data
-
+      
 #go to 7
 
 #EXAMPLE OBJECT
