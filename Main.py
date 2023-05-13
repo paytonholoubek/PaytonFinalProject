@@ -116,25 +116,24 @@ def main():
        
         if player_input == "save":
 
-            #this creates a text file name "save.txt". The "w" means that you are writing to it
+            
             f = open("save.txt", "w")
-            f.write("") #this is creating the file/clearing it if it already exists
-            f.close() #closes the file
-
-            f = open("save.txt", "a") #opens the "save.txt" file, the "a" means that you are appending to it
-            for i in range(len(save)): #for loop going through the save list
-                  f.write(str(save[i]) + ",") #systematically saving each value in the save list to "save.txt" with a comma after it
+            f.write("") 
+            f.close() 
+            f = open("save.txt", "a") 
+            for i in range(len(save)): 
+                  f.write(str(save[i]) + ",") 
 
             f.close() #close the file
 
         if player_input == "load":
-            f = open("save.txt", "r") #opens "save.txt", the "r" means that you are reading the file
-            line = f.readline() #saves the first line of "save.txt" as a variable
-            f.close() #close the file
+            f = open("save.txt", "r") 
+            line = f.readline()
+            f.close() 
 
-            saveLoad = line.split(",") #.split() save the line we loaded from "save.txt" into the save variable but splits it at each comma; 1,2,3 would become ["1","2","3"]
+            saveLoad = line.split(",")
 
-            #the following code just assigns each variable true or false depending on what value saveLoad[x] was
+           
             if saveLoad[0] == "True":
                   room9NoZ = True
             else:
@@ -329,7 +328,7 @@ def main():
                     print("You cannot go this way.")
                 if player_input == "west":
                       room_number = 5
-                      if Room5_zombiesgone == False: #this will push you back to room 4 if the zombies are still there; there is currently no way to kill the zombies. I didn't know how you wanted to do that so I'll let you do it.
+                      if Room5_zombiesgone == False: 
                         print(Room5z)
                         room_number = 5
                       elif Room5_zombiesgone == True:
@@ -373,9 +372,9 @@ def main():
         elif "room" + str(room_number) == "room6": #Room 6
                 if player_input == "north":
                     room_number = 7
-                    if item1_collected: #this section has the baseball bat which I assume you should be able to pick up, there is only code for a samuri sword though so i didn't know what do do here
-                        print(Room7) #I just put this as an if statement testing to see if item1_collected is true or not, if it is true than it doesn't say anything about the baseball bat, if it is false it does
-                    if not(item1_collected): #feel free to fix this if you want/need to.
+                    if item1_collected: 
+                        print(Room7) 
+                    if not(item1_collected): 
                         print(Room7_weaponnotcollected)
                 if player_input == "west":
                       #room_number = 6
@@ -387,7 +386,7 @@ def main():
                     #room_number = 0
                     print("you cannot go this way.")
                 if player_input == "pickup":
-                      pass #add you code to pick up the baseball bat here
+                      print("You can't pick up anything here")
                 if player_input == "attack":
                       print("you cannot attack here")
 
@@ -416,7 +415,7 @@ def main():
         elif "room" + str(room_number) == "room8": #Room 8
                 if player_input == "north":
                     room_number = 9
-                    if room9NoZ == False: #from how the text went, i assumed you wouldn't actually have to fight the zombies so I just made it a one time event with the room9NoZ bool. if it is true the event wont happen again
+                    if room9NoZ == False: 
                         print(Room9z)
                     elif room9NoZ == True:
                           print(Room9noz)
@@ -489,7 +488,7 @@ def main():
                       print(Room10)
                 if player_input == "east":
                       room_number = 12
-                      if room12NoZ == False: #I added an event for the zombies being in room 12.
+                      if room12NoZ == False: 
                         print(Room12z)
                       elif room12NoZ == True:
                         print(Room12noz)
@@ -498,7 +497,7 @@ def main():
                     print("you cannot go this way.")
                 if player_input == "pickup":
                       print("you cannot pick anything up here.")
-                if player_input == "attack": #You'll need to add code to fight the zombies here - currently you can just go right past them because nothing is stoping you.
+                if player_input == "attack": 
                       print("you cannot attack here")
 
         elif "room" + str(room_number) == "room12": #Room 12
@@ -556,7 +555,7 @@ def main():
                     #room_number = 0
                     print("you cannot go this way.")
                 if player_input == "pickup":
-                      keyPickedUp = True #this code allows the player to pick up the key - also make sure to add code to add the weapon to the player inventory
+                      keyPickedUp = True 
                       print("You picked up the key, it looks like it goes to a locked door.")
                       inventory.append(item4)
                 if player_input == "attack":
@@ -607,7 +606,7 @@ def main():
                       print(Room18)
                 if player_input == "east":
                       room_number = 22
-                      if shotgunPickedUp == False: #one time event to pick up the shotgun
+                      if shotgunPickedUp == False: 
                         print(Room22_weaponnotcollected)
                       elif shotgunPickedUp == True:
                         print(Room22)
@@ -615,7 +614,7 @@ def main():
                     room_number = 16
                     print(Room16)
                 if player_input == "pickup":
-                      pass #put code here for picking up the shotgun - make sure to set the shotgunPickedUp variable to True.
+                      pass 
                 if player_input == "attack":
                       print("you cannot attack here")
 
@@ -643,7 +642,7 @@ def main():
                 if player_input == "attack" and item2 not in inventory:
                       print("You don't have the correct weapon to defeat the zombies!")
 
-        elif "room" + str(room_number) == "room19": #Room 19 something I noticed about this room is that you have to fight zombies when coming from the south but can go straight through when coming from the east, you can fix this if you want; just an observation.
+        elif "room" + str(room_number) == "room19": 
                 if player_input == "north":
                     #room_number = 8
                     print("You cannot go this way")
@@ -669,7 +668,7 @@ def main():
                       room_number = 21
                       if isaacSaved == True:
                             print(Room21_isaacsaved)
-                      if isaacSaved == False: #another single time event using a boolen
+                      if isaacSaved == False: 
                         print(Room21_isaacnotsaved)
                         isaacSaved = True
                 if player_input == "east":
@@ -734,7 +733,7 @@ def main():
                       room_number = 24
                       print(Room24_normal)
                 if player_input == "east" and ending1 == True and ending2 == True and ending3 == True and ending4 == True:
-                      print("As you enter the room, you see a painting at the end glowing very bright, it looks like a portal you can enter!\n") #this says it has a normal room and an ending but they are both the same, im going to assume this isn't finished so I just put the normal room 24
+                      print("As you enter the room, you see a painting at the end glowing very bright, it looks like a portal you can enter!\n") 
                 if player_input == "south":
                     #room_number = 0
                     print("you cannot go this way.")
@@ -793,7 +792,7 @@ def main():
 
         elif "room" + str(room_number) == "room26": #Room 26
                 if player_input == "north":
-                    if Room27_unlocked == False: #only lets the player in the locked door if they have the key
+                    if Room27_unlocked == False: 
                           print(Room27_nokey)
                     elif Room27_unlocked == True:
                           room_number = 27
@@ -822,7 +821,7 @@ def main():
                     room_number = 30
                     if tazzSaved == True:      
                           print(Room30_tazzsaved)                   
-                    elif tazzSaved == False: #one time event to pick up the baton
+                    elif tazzSaved == False:
                           print(Room30_tazznotsaved)
                           tazzSaved = True
                 if player_input == "west":
@@ -835,7 +834,7 @@ def main():
                     #room_number = 0
                     print("you cannot go this way.")
                 if player_input == "pickup":
-                      pass #add code to pick up baton - make sure to set the batonPickUp Variable to True.
+                      pass 
                 if player_input == "attack":
                       print("you cannot attack here")
 
